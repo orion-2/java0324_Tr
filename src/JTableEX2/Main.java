@@ -63,13 +63,13 @@ public class Main extends JFrame {
 	Main() {
 		Dimension size = new Dimension(600, 400);
 		menuLayout();// 팝업메뉴
-		tableSetting();
-		createInputP();
-		createTabbedP();
+		tableSetting(); //테이블세팅
+		createInputP(); //추가,수정,삭제,저장 기능세팅
+		createTabbedP(); //테이블구성
 
 		init(); // frame이 실행되고 모든 컴포넌트가 생성되면 초기 데이터 값을 가져오는 메서드
 
-		this.setLocation(300, 300);
+		this.setLocation(300, 300); 
 		this.setSize(size);
 		this.add(tabPane);
 		// this.setPreferredSize(size);
@@ -118,15 +118,15 @@ public class Main extends JFrame {
 	}
 
 	public void tableSetting() {
-		table.setRowMargin(0);
-		table.getColumnModel().setColumnMargin(0);
-		table.getTableHeader().setReorderingAllowed(false);
-		table.getTableHeader().setResizingAllowed(false);
+		table.setRowMargin(5); //세로여백
+		table.getColumnModel().setColumnMargin(0);//속성간 가로여백
+		table.getTableHeader().setReorderingAllowed(false);//테이블 헤더 위치변경가능유무
+		table.getTableHeader().setResizingAllowed(false);//테이블 헤더 사이즈변경가능유무
 
-		table.setShowVerticalLines(false);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-		table.add(popup);
+		table.setShowVerticalLines(false);//테이블 세로라인 유무
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//한번에 한개씩 인덱스범위 선택, SINGLE_INTERVAL_SELECTION 한번에 여러개의 연속된 인덱스범위선택
+		
+		table.add(popup); //테이블의 팝업메뉴추가
 		table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getButton() == 1) { //왼쪽클릭
@@ -134,14 +134,14 @@ public class Main extends JFrame {
 				if (e.getClickCount() == 2) {//더블클릭
 				}
 				if (e.getButton() == 3) {//우클릭
-					int column = table.columnAtPoint(e.getPoint());
-					int row = table.rowAtPoint(e.getPoint());
-					table.changeSelection(row, column, false, false);
+					int column = table.columnAtPoint(e.getPoint());//열의인덱스를 반환
+					int row = table.rowAtPoint(e.getPoint());//행의인덱스를 반환
+					table.changeSelection(row, column, false, false);//두 플래그의 상태에 따라 테이블의 선택모델을 갱신
 					popup.show(table, e.getX(), e.getY());
 				}
 			}
 		});
-
+//		객체,숫자,날짜 등 기본 셀렌더러 생성
 		DefaultTableCellRenderer ts = new DefaultTableCellRenderer();
 		ts.setHorizontalAlignment(SwingConstants.CENTER);
 		TableColumnModel tc = table.getColumnModel();

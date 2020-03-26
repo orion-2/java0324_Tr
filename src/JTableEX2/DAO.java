@@ -89,9 +89,9 @@ public class DAO {
 						DTOGrade grade = new DTOGrade();
 						
 						grade.setName(rs.getString("name"));
-						grade.setJ1(rs.getString("j1"));
-						grade.setJ2(rs.getString("j2"));
-						grade.setJ3(rs.getString("j3"));
+						grade.setJ1(rs.getString("kor"));
+						grade.setJ2(rs.getString("eng"));
+						grade.setJ3(rs.getString("mat"));
 						
 						list.add(grade.getArray());
 					}
